@@ -1,4 +1,4 @@
-package mail.tolstov.springcourse.config.controllers;
+package mail.tolstov.springcourse.controllers;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
