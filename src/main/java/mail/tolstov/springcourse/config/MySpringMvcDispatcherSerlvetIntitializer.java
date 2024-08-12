@@ -2,9 +2,14 @@ package mail.tolstov.springcourse.config;
 
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.DispatcherType;
+import javax.servlet.FilterRegistration;
+
+import java.util.EnumSet;
 
 public class MySpringMvcDispatcherSerlvetIntitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
@@ -25,11 +30,23 @@ public class MySpringMvcDispatcherSerlvetIntitializer extends AbstractAnnotation
     @Override
     public void onStartup(ServletContext aServletContext) throws ServletException {
         super.onStartup(aServletContext);
+        registerCharacterEncodingFilter(aServletContext);
         registerHiddenFieldFilter(aServletContext);
     }
 
     private void registerHiddenFieldFilter(ServletContext aContext) {
         aContext.addFilter("hiddenHttpMethodFilter",
                 new HiddenHttpMethodFilter()).addMappingForUrlPatterns(null ,true, "/*");
+    }
+
+    private void registerCharacterEncodingFilter(ServletContext aContext) {
+        EnumSet<DispatcherType> dispatcherTypes = EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD);
+
+        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+        characterEncodingFilter.setEncoding("UTF-8");
+        characterEncodingFilter.setForceEncoding(true);
+
+        FilterRegistration.Dynamic characterEncoding = aContext.addFilter("characterEncoding", characterEncodingFilter);
+        characterEncoding.addMappingForUrlPatterns(dispatcherTypes, true, "/*");
     }
 }
