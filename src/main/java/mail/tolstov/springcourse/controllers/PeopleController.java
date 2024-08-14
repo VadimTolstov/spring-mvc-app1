@@ -38,8 +38,6 @@ public class PeopleController {
 
     @GetMapping("/new")
     public String newPerson(@ModelAttribute("person") Person person) {
-//    public String newPerson(Model model){
-//        model.addAttribute("person", new Person());
         return "people/new";
     }
 
