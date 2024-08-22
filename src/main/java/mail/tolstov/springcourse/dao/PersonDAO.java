@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @Component
 public class PersonDAO {
-
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -34,13 +33,13 @@ public class PersonDAO {
     }
 
     public void save(Person person) {
-        jdbcTemplate.update("INSERT INTO person(full_name, year_of_birth,) VALUES(?,?)",
-                person.getFullName(), person.getYearOfBirth());
+        jdbcTemplate.update("INSERT INTO person(full_name, year_of_birth) VALUES(?,?)",
+                person.getFullName().trim(), person.getYearOfBirth());
     }
 
     public void update(int id, Person updatedPerson) {
         jdbcTemplate.update("UPDATE person SET full_name=?, year_of_birth=? WHERE id=?",
-                updatedPerson.getFullName(), updatedPerson.getYearOfBirth(), id);
+                updatedPerson.getFullName().trim(), updatedPerson.getYearOfBirth(), id);
     }
 
 

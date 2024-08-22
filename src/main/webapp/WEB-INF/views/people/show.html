@@ -10,10 +10,12 @@
 <p th:text="${person.getFullName()}">VALUE</p>
 <p th:text="${person.getYearOfBirth()}">VALUE</p>
 
-<a th:href="@{/people/{id}/edit(id=${person.getId()})}">Edit</a>
+<a th:href="@{/people/{id}/edit(id=${person.getId()})}">
+    <input type="submit" value="Редактировать">
+</a>
 
 <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
-    <input type="submit" value="Delete">
+    <input type="submit" value="Удалить">
 
 </form>
 </body>
