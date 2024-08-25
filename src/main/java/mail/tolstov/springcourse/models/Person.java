@@ -6,7 +6,7 @@ import javax.validation.constraints.*;
 public class Person {
     private int id;
     @NotEmpty(message = "Поле ФИО не может быть пустым")
-    @Size(min = 10, max = 50, message = "ФИО должно содержать от 10 до 50 символов")
+    @Size(min = 2, max = 100, message = "ФИО должно содержать от 10 до 50 символов")
     private String fullName;
     @Max(value = 3000)
     @Min(value = 1900)
@@ -15,8 +15,7 @@ public class Person {
     public Person() {
     }
 
-    public Person(int id, String fullName, int yearOfBirth) {
-        this.id = id;
+    public Person( String fullName, int yearOfBirth) {
         this.fullName = fullName;
         this.yearOfBirth = yearOfBirth;
     }
